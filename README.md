@@ -1,7 +1,7 @@
 **Introduciton**
 
-Compare and merge MySQL schemas.
-The python scripts are implemented in python 2.7
+Compare and merge MySQL schemas.<br>
+The python scripts are implemented in python 2.7<br>
 Forked from https://github.com/napoleonu/merge_schema
 
 **Note**
