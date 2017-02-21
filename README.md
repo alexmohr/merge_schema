@@ -1,6 +1,8 @@
 **Introduciton**
 
 Compare and merge MySQL schemas.
+The python scripts are implemented in python 2.7
+Forked from https://github.com/napoleonu/merge_schema
 
 **Note**
 
@@ -12,7 +14,7 @@ This script can't identify a rename action.
 
 **Samples**
 
-	~/merge_schema (master) $ python merge_schema.py -f from_schema.sql -t to_schema.sql -o merge_alters.sql
+	~/merge_schema (master) $ python2.7 merge_schema.py -f from_schema.sql -t to_schema.sql -o merge_alters.sql
     -- del_table
     drop table del_table;
      
