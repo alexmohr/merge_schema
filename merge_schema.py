@@ -35,6 +35,8 @@ def config_option():
     parser.add_option("-t","--to",dest="to_schema",help="to database schema file")
     parser.add_option("-o","--out",dest="merge_alters",help="output merge alters")
     parser.add_option("-i","--ignore-autoincrement",dest="ignore_autoincrement",help="ignore the autoincrements",action="store_true")
+    parser.add_option("-r","--ignore-tables",dest="ignore_tables",default="",
+     help="Ignores the given tables more than 1 can be added by seperating them with colon (;)")
 
     (options, args) = parser.parse_args()
 
@@ -47,6 +49,7 @@ def config_option():
     opt_main["to_schema"] = options.to_schema
     opt_main["merge_alters"] = options.merge_alters
     opt_main["ignore_autoincrement"] = options.ignore_autoincrement
+    opt_main["ignore_tables"] = [table.strip() for table in options.ignore_tables.split(";")]
 
 class SchemaObjects(object):
     def __init__(self,from_schema,to_schema):
@@ -110,6 +113,10 @@ class SchemaObjects(object):
             for table in tables:
                 table_name = re.match(r"(CREATE TABLE \`)(.*)(\` \()", table)
                 if table_name:
+
+                    if table_name.group(2) in opt_main["ignore_tables"]:
+                        continue
+
                     if opt_main['ignore_autoincrement']:
                         table = re.sub("(AUTO_INCREMENT=[^\s]+)","",table)
 
